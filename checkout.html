@@ -1,79 +1,69 @@
-const crypto = require('crypto');
-
-const MERCHANT_ID = '3350784';
-const HASH_KEY = 'LGtbLNctGyKMHCKd';
-const HASH_IV = 'ZfXzRRBdTemplmLf';
-
-function generateCheckMac(params) {
-  // 按照綠界規定排序
-  const sorted = Object.keys(params).sort().reduce((obj, key) => {
-    obj[key] = params[key];
-    return obj;
-  }, {});
-
-  // 組合字串
-  let str = 'HashKey=' + HASH_KEY;
-  for (const [key, val] of Object.entries(sorted)) {
-    str += '&' + key + '=' + val;
-  }
-  str += '&HashIV=' + HASH_IV;
-
-  // URL encode（綠界規定）
-  str = encodeURIComponent(str)
-    .replace(/%2d/gi, '-')
-    .replace(/%5f/gi, '_')
-    .replace(/%2e/gi, '.')
-    .replace(/%21/gi, '!')
-    .replace(/%2a/gi, '*')
-    .replace(/%28/gi, '(')
-    .replace(/%29/gi, ')')
-    .toLowerCase();
-
-  // SHA256
-  return crypto.createHash('sha256').update(str).digest('hex').toUpperCase();
-}
-
-exports.handler = async (event) => {
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
-  }
-
-  try {
-    const body = JSON.parse(event.body);
-    const { productName, price, payMethod, buyerName, buyerEmail, buyerPhone } = body;
-
-    if (!productName || !price || !payMethod || !buyerName || !buyerEmail) {
-      return { statusCode: 400, body: JSON.stringify({ error: '缺少必要欄位' }) };
-    }
-
-    // 產生訂單編號
-    const now = new Date();
-    const pad = n => String(n).padStart(2, '0');
-    const tradeNo = 'CS' + now.getFullYear() + pad(now.getMonth()+1) + pad(now.getDate()) + pad(now.getHours()) + pad(now.getMinutes()) + pad(now.getSeconds());
-    const tradeDate = now.getFullYear() + '/' + pad(now.getMonth()+1) + '/' + pad(now.getDate()) + ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
-
-    const params = {
-      MerchantID: MERCHANT_ID,
-      MerchantTradeNo: tradeNo,
-      MerchantTradeDate: tradeDate,
-      PaymentType: 'aio',
-      TotalAmount: String(price),
-      TradeDesc: 'ChengShuang教材購買',
-      ItemName: productName,
-      ReturnURL: 'https://cheng-shuang.netlify.app/order-complete.html',
-      ClientBackURL: 'https://cheng-shuang.netlify.app/order-complete.html',
-      ChoosePayment: payMethod,
-      EncryptType: '1',
-    };
-
-    params.CheckMacValue = generateCheckMac(params);
-
-    return {
-      statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ params, action: 'https://payment.ecpay.com.tw/Checkout/Index' })
-    };
-  } catch (err) {
-    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
-  }
-};
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>結帳 — Cheng Shuang</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#FDF6EC;font-family:'Noto Sans TC',sans-serif;color:#3D1F0A;min-height:100vh;}
+.topbar{background:#FDF6EC;padding:0.9rem 1.2rem;display:flex;align-items:center;gap:0.6rem;border-bottom:1px solid rgba(192,120,48,0.2);position:sticky;top:0;z-index:10;}
+.back-btn{background:none;border:none;font-size:20px;cursor:pointer;color:#B8401A;}
+.topbar-title{font-size:13px;font-weight:700;color:#3D1F0A;}
+.container{max-width:480px;margin:0 auto;padding:1.2rem;}
+.sec-title{font-size:13px;font-weight:700;color:#B8401A;letter-spacing:1px;margin-bottom:0.8rem;}
+.product-card{background:#fff;border:1px solid #EDD8B0;border-radius:14px;padding:1.1rem 1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.product-info h3{font-size:14px;font-weight:700;color:#3D1F0A;}
+.product-info p{font-size:12px;color:#A0622A;margin-top:0.2rem;}
+.product-price{font-size:15px;font-weight:700;color:#B8401A;margin-top:0.3rem;}
+.buy-btn{background:#B8401A;color:#fff;border:none;border-radius:50px;padding:0.55rem 1.1rem;font-size:13px;font-weight:700;font-family:'Noto Sans TC',sans-serif;cursor:pointer;text-decoration:none;white-space:nowrap;flex-shrink:0;display:inline-block;}
+.buy-btn:active{background:#7A2510;}
+.note{font-size:11px;color:#A0622A;text-align:center;line-height:1.8;margin-top:1.5rem;padding:1rem;background:#fff;border-radius:12px;border:1px solid #EDD8B0;}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <button class="back-btn" onclick="history.back()">‹</button>
+  <span class="topbar-title">選擇商品結帳</span>
+</div>
+<div class="container">
+  <p class="sec-title">▸ 點選商品前往付款</p>
+  <div class="product-card">
+    <div class="product-info">
+      <h3>注音符號手寫板</h3>
+      <p>含木製鉛筆 × 1、練習紙 × 1</p>
+      <p class="product-price">$1,050</p>
+    </div>
+    <a class="buy-btn" href="https://p.ecpay.com.tw/0D7EB9E" target="_blank">前往付款 →</a>
+  </div>
+  <div class="product-card">
+    <div class="product-info">
+      <h3>注音符號拼音板（小款）</h3>
+      <p>含字卡、海報、木質拼音板</p>
+      <p class="product-price">$920</p>
+    </div>
+    <a class="buy-btn" href="https://p.ecpay.com.tw/568F7C5" target="_blank">前往付款 →</a>
+  </div>
+  <div class="product-card">
+    <div class="product-info">
+      <h3>注音符號拼音板（大款）</h3>
+      <p>含字卡、海報、木質拼音板（大）</p>
+      <p class="product-price">$1,180</p>
+    </div>
+    <a class="buy-btn" href="https://p.ecpay.com.tw/0FA4005" target="_blank">前往付款 →</a>
+  </div>
+  <p class="note">
+    💳 支援信用卡、ATM 轉帳、超商代碼付款<br>
+    🔒 付款由綠界科技處理，資料加密安全無虞<br>
+    📦 付款完成後將以 Email 通知出貨資訊
+  </p>
+</div>
+<script>
+const p = new URLSearchParams(window.location.search).get('product');
+if (p === 'write') window.location.href = 'https://p.ecpay.com.tw/0D7EB9E';
+else if (p === 'pinyin_small') window.location.href = 'https://p.ecpay.com.tw/568F7C5';
+else if (p === 'pinyin_large') window.location.href = 'https://p.ecpay.com.tw/0FA4005';
+</script>
+</body>
+</html>
