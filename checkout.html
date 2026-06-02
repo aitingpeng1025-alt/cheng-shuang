@@ -1,0 +1,79 @@
+const crypto = require('crypto');
+
+const MERCHANT_ID = '3350784';
+const HASH_KEY = 'LGtbLNctGyKMHCKd';
+const HASH_IV = 'ZfXzRRBdTemplmLf';
+
+function generateCheckMac(params) {
+  // 按照綠界規定排序
+  const sorted = Object.keys(params).sort().reduce((obj, key) => {
+    obj[key] = params[key];
+    return obj;
+  }, {});
+
+  // 組合字串
+  let str = 'HashKey=' + HASH_KEY;
+  for (const [key, val] of Object.entries(sorted)) {
+    str += '&' + key + '=' + val;
+  }
+  str += '&HashIV=' + HASH_IV;
+
+  // URL encode（綠界規定）
+  str = encodeURIComponent(str)
+    .replace(/%2d/gi, '-')
+    .replace(/%5f/gi, '_')
+    .replace(/%2e/gi, '.')
+    .replace(/%21/gi, '!')
+    .replace(/%2a/gi, '*')
+    .replace(/%28/gi, '(')
+    .replace(/%29/gi, ')')
+    .toLowerCase();
+
+  // SHA256
+  return crypto.createHash('sha256').update(str).digest('hex').toUpperCase();
+}
+
+exports.handler = async (event) => {
+  if (event.httpMethod !== 'POST') {
+    return { statusCode: 405, body: 'Method Not Allowed' };
+  }
+
+  try {
+    const body = JSON.parse(event.body);
+    const { productName, price, payMethod, buyerName, buyerEmail, buyerPhone } = body;
+
+    if (!productName || !price || !payMethod || !buyerName || !buyerEmail) {
+      return { statusCode: 400, body: JSON.stringify({ error: '缺少必要欄位' }) };
+    }
+
+    // 產生訂單編號
+    const now = new Date();
+    const pad = n => String(n).padStart(2, '0');
+    const tradeNo = 'CS' + now.getFullYear() + pad(now.getMonth()+1) + pad(now.getDate()) + pad(now.getHours()) + pad(now.getMinutes()) + pad(now.getSeconds());
+    const tradeDate = now.getFullYear() + '/' + pad(now.getMonth()+1) + '/' + pad(now.getDate()) + ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
+
+    const params = {
+      MerchantID: MERCHANT_ID,
+      MerchantTradeNo: tradeNo,
+      MerchantTradeDate: tradeDate,
+      PaymentType: 'aio',
+      TotalAmount: String(price),
+      TradeDesc: 'ChengShuang教材購買',
+      ItemName: productName,
+      ReturnURL: 'https://cheng-shuang.netlify.app/order-complete.html',
+      ClientBackURL: 'https://cheng-shuang.netlify.app/order-complete.html',
+      ChoosePayment: payMethod,
+      EncryptType: '1',
+    };
+
+    params.CheckMacValue = generateCheckMac(params);
+
+    return {
+      statusCode: 200,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ params, action: 'https://payment.ecpay.com.tw/Checkout/Index' })
+    };
+  } catch (err) {
+    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
+  }
+};
