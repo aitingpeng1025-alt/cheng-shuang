@@ -4,15 +4,16 @@
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap');
   *{box-sizing:border-box;margin:0;padding:0;}
   .page{background:#F7F4EF;min-height:100vh;padding:1.8rem 1.1rem 3rem;font-family:'Noto Sans TC',sans-serif;display:flex;flex-direction:column;align-items:center;}
-  .profile-row{display:flex;flex-direction:row;align-items:center;gap:14px;width:100%;max-width:340px;margin-bottom:1.2rem;}
+  .profile-row{display:flex;flex-direction:column;align-items:flex-start;gap:10px;width:100%;max-width:340px;margin-bottom:1.2rem;}
+  .profile-top{display:flex;flex-direction:row;align-items:center;gap:14px;width:100%;}
   .avatar-col{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:7px;}
-  .avatar-ring{width:74px;height:74px;border-radius:50%;background:linear-gradient(135deg,#C0621A,#E8A050);padding:3px;display:flex;align-items:center;justify-content:center;}
+  .avatar-ring{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#C0621A,#E8A050);padding:3px;display:flex;align-items:center;justify-content:center;}
   .avatar-inner{width:100%;height:100%;border-radius:50%;background:#a39179;border:2px solid #F7F4EF;display:flex;align-items:center;justify-content:center;}
-  .avatar-initials{font-family:'Noto Sans TC',sans-serif;font-weight:400;font-size:22px;color:#F7F4EF;}
+  .avatar-initials{font-family:'Noto Sans TC',sans-serif;font-weight:400;font-size:24px;color:#F7F4EF;}
   .ig-icon-btn{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center;text-decoration:none;border:none;cursor:pointer;font-size:15px;}
   .profile-info{flex:1;display:flex;flex-direction:column;gap:5px;}
   .username{font-family:'Noto Sans TC',sans-serif;font-weight:400;font-size:15px;color:#5a4535;}
-  .tagline{font-size:11px;font-weight:300;color:#b0a898;line-height:2;}
+  .tagline{font-size:12px;font-weight:300;color:#b0a898;line-height:2;width:100%;}
   .section-label{font-size:11px;font-weight:400;color:#a39179;letter-spacing:2px;margin-bottom:0.6rem;text-align:left;width:100%;max-width:340px;letter-spacing:1px;}
   .divider{width:100%;max-width:340px;height:1px;background:#a39179;opacity:0.3;margin:1rem 0;}
   /* 分類標籤 — 磚紅色系縮小 */
@@ -20,15 +21,15 @@
   .tab{background:#6b5540;color:#FFFFFF;border:none;border-radius:50px;padding:0.26rem 0.68rem;font-size:11px;font-family:'Noto Sans TC',sans-serif;cursor:pointer;transition:background 0.18s,color 0.18s;}
   .tab.active{background:#4a3828;color:#FFFFFF;font-weight:500;}
   /* 影片卡片 */
-  .reel-list{width:100%;max-width:340px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:0.6rem;}
+  .reel-list{width:100%;max-width:340px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:0.6rem;}
   .reel-card{background:#F7F4EF;border:1px solid #a39179;border-radius:14px;overflow:hidden;cursor:pointer;text-decoration:none;display:flex;flex-direction:column;transition:opacity 0.18s;}
   .reel-card:active{opacity:0.75;}
-  .reel-cover-wrap{position:relative;width:100%;height:150px;overflow:hidden;background:#e8e0d4;}
+  .reel-cover-wrap{position:relative;width:100%;height:130px;overflow:hidden;background:#e8e0d4;}
   .reel-cover-img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
   .reel-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(61,31,10,0.55);display:flex;align-items:center;justify-content:center;font-size:18px;color:#F7F4EF;}
-  .reel-body{padding:0.35rem 0.4rem 0.4rem;display:flex;align-items:center;gap:4px;}
+  .reel-body{padding:0.4rem 0.5rem 0.45rem;display:flex;align-items:center;gap:4px;}
   .reel-info{flex:1;}
-  .reel-title{font-size:10px;font-weight:500;color:#5a4535;line-height:1.4;}
+  .reel-title{font-size:11px;font-weight:500;color:#5a4535;line-height:1.4;}
   .reel-sub{font-size:10px;color:#9A8A7A;margin-top:2px;}
   .reel-arrow{font-size:14px;color:#a39179;opacity:0.6;flex-shrink:0;}
   .hidden{display:none!important;}
@@ -44,9 +45,9 @@
   .mc-wide .m-tag{background:#c4b5a4;color:#F7F4EF;}
   /* 教材購買照片佔位 */
   .mp-card{background:#F7F4EF;border:1px solid #a39179;padding:0;}
-  .mp-card .m-name{color:#6B3A1F;font-size:11px;}
+  .mp-card .m-name{color:#6B3A1F;font-size:13px;}
   .mp-card .m-tag{background:rgba(192,120,48,0.18);color:#7A6A5A;}
-  .mp-photo{width:100%;height:150px;background:#e8e0d4;border-radius:10px 10px 0 0;display:flex;align-items:center;justify-content:center;font-size:28px;color:#b0a898;flex-shrink:0;}
+  .mp-photo{width:100%;height:180px;background:#e8e0d4;border-radius:10px 10px 0 0;display:flex;align-items:center;justify-content:center;font-size:28px;color:#b0a898;flex-shrink:0;}
   .mp-card .m-name,.mp-card .m-tag{padding:0 0.7rem;}
   .mp-card .m-name{margin-top:0.5rem;margin-bottom:0.2rem;}
   .mp-card .m-tag{margin-bottom:0.65rem;display:inline-block;margin-left:0.7rem;}
@@ -81,13 +82,16 @@
 
 <div class="page">
   <div class="profile-row">
-    <div class="avatar-col">
-      <div class="avatar-ring"><div class="avatar-inner"><span class="avatar-initials">CS</span></div></div>
-      <a class="ig-icon-btn" href="https://www.instagram.com/cheng.shuang1025" target="_blank"><i class="ti ti-camera" style="font-size:24px;color:#b0a898;" aria-hidden="true"></i></a>
-    </div>
-    <div class="profile-info">
-      <p class="username">@cheng.shuang1025</p>
-      <p class="name-title" style="font-size:19px;font-weight:400;color:#a39179;letter-spacing:0.5px;margin-bottom:0.4rem;">好事丞雙 x 用插畫玩手作</p><p class="tagline">我是喜歡桌上遊戲的探險家<br>真實喜歡才會剪片與您分享<br>我偶爾喜歡做點不像樣的料理<br>偶爾也喜歡跟孩子在同張桌上創作<br>這裡是我想跟您分享的我們家<br>歡迎支持我們設計的自製教材<br>或是參與我實用推薦的團品</p>
+    <div class="profile-top">
+      <div class="avatar-col">
+        <div class="avatar-ring"><div class="avatar-inner"><span class="avatar-initials">CS</span></div></div>
+        <a class="ig-icon-btn" href="https://www.instagram.com/cheng.shuang1025" target="_blank"><i class="ti ti-camera" style="font-size:24px;color:#b0a898;" aria-hidden="true"></i></a>
+      </div>
+      <div class="profile-info">
+        <p class="username">@cheng.shuang1025</p>
+        <p class="name-title" style="font-size:19px;font-weight:400;color:#a39179;letter-spacing:0.5px;margin-bottom:0.5rem;">好事丞雙 x 用插畫玩手作</p>
+        <p class="tagline">我是喜歡桌上遊戲的探險家<br>真實喜歡才會剪片與您分享<br>我偶爾喜歡做點不像樣的料理<br>偶爾也喜歡跟孩子在同張桌上創作<br>這裡是我想跟您分享的我們家<br>歡迎支持我們設計的自製教材<br>或是參與我實用推薦的團品</p>
+      </div>
     </div>
   </div>
 
@@ -285,31 +289,37 @@
 
   <div class="divider"></div>
 
+  <!-- 開團商品（時間到自動出現） -->
+  <p class="section-label" id="groupBuyingLabel" style="display:none;"><i class="ti ti-tag" aria-hidden="true"></i> 開團商品</p>
+  <div id="groupBuyingArea" style="width:100%;max-width:340px;"></div>
+
+  <div class="divider" id="groupBuyingDivider" style="display:none;"></div>
+
   <!-- 開團預告 -->
   <p class="section-label"><i class="ti ti-bell" aria-hidden="true"></i> 開團預告</p>
 
-  <div style="width:100%;max-width:340px;background:#F7F4EF;border-radius:14px;border:1px dashed #c4b5a4;display:flex;overflow:hidden;min-height:130px;margin-bottom:0.8rem;">
+  <div data-product-name="喜光護眼檯燈" style="width:100%;max-width:340px;background:#F7F4EF;border-radius:14px;border:1px dashed #c4b5a4;display:flex;overflow:hidden;min-height:130px;margin-bottom:0.8rem;">
     <div style="flex:1;padding:1rem;display:flex;flex-direction:column;justify-content:space-between;">
       <div>
         <span style="display:inline-block;font-size:9px;font-weight:400;color:#a39179;border:1px solid #d4c9b5;border-radius:20px;padding:2px 8px;letter-spacing:1px;margin-bottom:0.4rem;">COMING SOON</span>
         <p style="font-size:13px;font-weight:400;color:#5a4535;margin-bottom:0.2rem;">喜光護眼檯燈</p>
         <p style="font-size:10px;font-weight:300;color:#b0a898;line-height:1.6;margin-bottom:0.6rem;">6.5 → 6.12</p>
       </div>
-      <a href="#" style="display:inline-flex;align-items:center;gap:4px;border:1px solid #6b5540;color:#6b5540;border-radius:50px;padding:0.4rem 0.65rem 0.4rem 0.6rem;font-size:10px;font-weight:400;font-family:'Noto Sans TC',sans-serif;text-decoration:none;background:transparent;width:fit-content;"><i class="ti ti-bell" style="font-size:12px;" aria-hidden="true"></i> 開團提醒我</a>
+      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%E5%96%9C%E5%85%89%E8%AD%B7%E7%9C%BC%E6%AA%AF%E7%87%88&dates=20260605/20260613&details=%E5%A5%BD%E4%BA%8B%E4%B8%9E%E9%9B%99%E9%96%8B%E5%9C%98%20%E2%80%94%20%E5%96%9C%E5%85%89%E8%AD%B7%E7%9C%BC%E6%AA%AF%E7%87%88" target="_blank" style="display:inline-flex;align-items:center;gap:4px;border:1px solid #6b5540;color:#6b5540;border-radius:50px;padding:0.4rem 0.65rem 0.4rem 0.6rem;font-size:10px;font-weight:400;font-family:'Noto Sans TC',sans-serif;text-decoration:none;background:transparent;width:fit-content;"><i class="ti ti-bell" style="font-size:12px;" aria-hidden="true"></i> 開團提醒我</a>
     </div>
-    <div style="width:110px;flex-shrink:0;border-left:1px dashed #c4b5a4;background:#ede8e0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:300;color:#b0a898;text-align:center;padding:0.5rem;">商品圖片</div>
+    <div style="width:140px;flex-shrink:0;border-left:1px dashed #c4b5a4;background:#ede8e0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:300;color:#b0a898;text-align:center;padding:0.5rem;">商品圖片</div>
   </div>
 
-  <div style="width:100%;max-width:340px;background:#F7F4EF;border-radius:14px;border:1px dashed #c4b5a4;display:flex;overflow:hidden;min-height:130px;margin-bottom:0.8rem;">
+  <div data-product-name="PUGO 護脊書包" style="width:100%;max-width:340px;background:#F7F4EF;border-radius:14px;border:1px dashed #c4b5a4;display:flex;overflow:hidden;min-height:130px;margin-bottom:0.8rem;">
     <div style="flex:1;padding:1rem;display:flex;flex-direction:column;justify-content:space-between;">
       <div>
         <span style="display:inline-block;font-size:9px;font-weight:400;color:#a39179;border:1px solid #d4c9b5;border-radius:20px;padding:2px 8px;letter-spacing:1px;margin-bottom:0.4rem;">COMING SOON</span>
         <p style="font-size:13px;font-weight:400;color:#5a4535;margin-bottom:0.2rem;">PUGO 護脊書包</p>
         <p style="font-size:10px;font-weight:300;color:#b0a898;line-height:1.6;margin-bottom:0.6rem;">6.8 → 6.17</p>
       </div>
-      <a href="#" style="display:inline-flex;align-items:center;gap:4px;border:1px solid #6b5540;color:#6b5540;border-radius:50px;padding:0.4rem 0.65rem 0.4rem 0.6rem;font-size:10px;font-weight:400;font-family:'Noto Sans TC',sans-serif;text-decoration:none;background:transparent;width:fit-content;"><i class="ti ti-bell" style="font-size:12px;" aria-hidden="true"></i> 開團提醒我</a>
+      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=PUGO%20%E8%AD%B7%E8%84%8A%E6%9B%B8%E5%8C%85&dates=20260608/20260618&details=%E5%A5%BD%E4%BA%8B%E4%B8%9E%E9%9B%99%E9%96%8B%E5%9C%98%20%E2%80%94%20PUGO%20%E8%AD%B7%E8%84%8A%E6%9B%B8%E5%8C%85" target="_blank" style="display:inline-flex;align-items:center;gap:4px;border:1px solid #6b5540;color:#6b5540;border-radius:50px;padding:0.4rem 0.65rem 0.4rem 0.6rem;font-size:10px;font-weight:400;font-family:'Noto Sans TC',sans-serif;text-decoration:none;background:transparent;width:fit-content;"><i class="ti ti-bell" style="font-size:12px;" aria-hidden="true"></i> 開團提醒我</a>
     </div>
-    <div style="width:110px;flex-shrink:0;border-left:1px dashed #c4b5a4;background:#ede8e0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:300;color:#b0a898;text-align:center;padding:0.5rem;">商品圖片</div>
+    <div style="width:140px;flex-shrink:0;border-left:1px dashed #c4b5a4;background:#ede8e0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:300;color:#b0a898;text-align:center;padding:0.5rem;">商品圖片</div>
   </div>
 
   <div style="width:100%;max-width:340px;background:#F7F4EF;border-radius:14px;border:1px dashed #c4b5a4;display:flex;overflow:hidden;min-height:130px;margin-bottom:0.8rem;">
@@ -319,9 +329,9 @@
         <p style="font-size:13px;font-weight:400;color:#5a4535;margin-bottom:0.2rem;">Orchard 新品桌遊團</p>
         <p style="font-size:10px;font-weight:300;color:#b0a898;line-height:1.6;margin-bottom:0.6rem;">6.17 → 6.24</p>
       </div>
-      <a href="#" style="display:inline-flex;align-items:center;gap:4px;border:1px solid #6b5540;color:#6b5540;border-radius:50px;padding:0.4rem 0.65rem 0.4rem 0.6rem;font-size:10px;font-weight:400;font-family:'Noto Sans TC',sans-serif;text-decoration:none;background:transparent;width:fit-content;"><i class="ti ti-bell" style="font-size:12px;" aria-hidden="true"></i> 開團提醒我</a>
+      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Orchard%20%E6%96%B0%E5%93%81%E6%A1%8C%E9%81%8A%E5%9C%98&dates=20260617/20260625&details=%E5%A5%BD%E4%BA%8B%E4%B8%9E%E9%9B%99%E9%96%8B%E5%9C%98%20%E2%80%94%20Orchard%20%E6%96%B0%E5%93%81%E6%A1%8C%E9%81%8A" target="_blank" style="display:inline-flex;align-items:center;gap:4px;border:1px solid #6b5540;color:#6b5540;border-radius:50px;padding:0.4rem 0.65rem 0.4rem 0.6rem;font-size:10px;font-weight:400;font-family:'Noto Sans TC',sans-serif;text-decoration:none;background:transparent;width:fit-content;"><i class="ti ti-bell" style="font-size:12px;" aria-hidden="true"></i> 開團提醒我</a>
     </div>
-    <div style="width:110px;flex-shrink:0;border-left:1px dashed #c4b5a4;background:#ede8e0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:300;color:#b0a898;text-align:center;padding:0.5rem;">商品圖片</div>
+    <div style="width:140px;flex-shrink:0;border-left:1px dashed #c4b5a4;background:#ede8e0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:300;color:#b0a898;text-align:center;padding:0.5rem;">商品圖片</div>
   </div>
 
   <div style="width:100%;max-width:340px;background:#F7F4EF;border-radius:14px;border:1px dashed #c4b5a4;display:flex;overflow:hidden;min-height:130px;margin-bottom:0.8rem;">
@@ -331,30 +341,74 @@
         <p style="font-size:13px;font-weight:400;color:#5a4535;margin-bottom:0.2rem;">Brendan 旅用背包收納</p>
         <p style="font-size:10px;font-weight:300;color:#b0a898;line-height:1.6;margin-bottom:0.6rem;">6.23 → 6.30</p>
       </div>
-      <a href="#" style="display:inline-flex;align-items:center;gap:4px;border:1px solid #6b5540;color:#6b5540;border-radius:50px;padding:0.4rem 0.65rem 0.4rem 0.6rem;font-size:10px;font-weight:400;font-family:'Noto Sans TC',sans-serif;text-decoration:none;background:transparent;width:fit-content;"><i class="ti ti-bell" style="font-size:12px;" aria-hidden="true"></i> 開團提醒我</a>
+      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Brendan%20%E6%97%85%E7%94%A8%E8%83%8C%E5%8C%85%E6%94%B6%E7%B4%8D&dates=20260623/20260701&details=%E5%A5%BD%E4%BA%8B%E4%B8%9E%E9%9B%99%E9%96%8B%E5%9C%98%20%E2%80%94%20Brendan%20%E6%97%85%E7%94%A8%E8%83%8C%E5%8C%85%E6%94%B6%E7%B4%8D" target="_blank" style="display:inline-flex;align-items:center;gap:4px;border:1px solid #6b5540;color:#6b5540;border-radius:50px;padding:0.4rem 0.65rem 0.4rem 0.6rem;font-size:10px;font-weight:400;font-family:'Noto Sans TC',sans-serif;text-decoration:none;background:transparent;width:fit-content;"><i class="ti ti-bell" style="font-size:12px;" aria-hidden="true"></i> 開團提醒我</a>
     </div>
-    <div style="width:110px;flex-shrink:0;border-left:1px dashed #c4b5a4;background:#ede8e0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:300;color:#b0a898;text-align:center;padding:0.5rem;">商品圖片</div>
+    <div style="width:140px;flex-shrink:0;border-left:1px dashed #c4b5a4;background:#ede8e0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:300;color:#b0a898;text-align:center;padding:0.5rem;">商品圖片</div>
   </div>
 
   <div class="divider"></div>
 
   <p class="section-label"><i class="ti ti-device-gamepad-2" aria-hidden="true"></i> 互動遊戲</p>
-  <div class="game-quiz" id="quizArea">
-    <p class="quiz-title">看圖猜注音！</p>
-    <div class="quiz-img-box" id="quizImg">
-      <div class="quiz-placeholder">☀️</div>
-      <p class="quiz-img-label" id="quizLabel">太陽</p>
+
+  <!-- 遊戲分類按鍵（同影片區設計） -->
+  <div class="tabs" style="margin-bottom:0.8rem;">
+    <button class="tab active" onclick="switchGame(this,'zhuyin')">注音投籃</button>
+    <button class="tab" onclick="switchGame(this,'game2')">遊戲二</button>
+    <button class="tab" onclick="switchGame(this,'game3')">遊戲三</button>
+  </div>
+
+  <!-- 注音投籃 -->
+  <div class="game-panel" id="game-zhuyin" style="width:100%;max-width:340px;">
+    <div style="background:#fff;border:1px solid #d4c9b5;border-radius:14px;overflow:hidden;">
+      <div style="padding:0.9rem 1rem 0.7rem;display:flex;align-items:center;justify-content:space-between;">
+        <div>
+          <p style="font-size:13px;font-weight:700;color:#3D1F0A;margin-bottom:0.2rem;">注音投籃</p>
+          <p style="font-size:11px;color:#9A8A7A;">看插圖猜注音，答對就投籃！</p>
+        </div>
+        <i class="ti ti-ball-basketball" style="font-size:28px;color:#c4673a;" aria-hidden="true"></i>
+      </div>
+      <div style="padding:0 1rem 0.9rem;">
+        <a href="zhuyin_basketball_game.html" style="display:flex;align-items:center;justify-content:center;gap:6px;background:#6b5540;color:#fff;border-radius:50px;padding:0.55rem;font-size:12px;font-weight:700;text-decoration:none;font-family:'Noto Sans TC',sans-serif;">
+          <i class="ti ti-player-play" style="font-size:14px;" aria-hidden="true"></i> 開始遊戲
+        </a>
+      </div>
     </div>
-    <p class="quiz-question">這個圖的注音是？</p>
-    <div class="quiz-options" id="quizOptions">
-      <button class="quiz-btn" onclick="checkAnswer(this,'ㄊㄞˋ')">ㄊㄞˋ</button>
-      <button class="quiz-btn" onclick="checkAnswer(this,'ㄊㄞˊ')">ㄊㄞˊ</button>
-      <button class="quiz-btn correct-ans" onclick="checkAnswer(this,'ㄊㄞˋ ㄧㄤ')">ㄊㄞˋ ㄧㄤ</button>
-      <button class="quiz-btn" onclick="checkAnswer(this,'ㄊㄧㄢ')">ㄊㄧㄢ</button>
+  </div>
+
+  <!-- 遊戲二（即將推出） -->
+  <div class="game-panel hidden" id="game-game2" style="width:100%;max-width:340px;">
+    <div style="background:#fff;border:1px solid #d4c9b5;border-radius:14px;overflow:hidden;">
+      <div style="padding:0.9rem 1rem 0.7rem;display:flex;align-items:center;justify-content:space-between;">
+        <div>
+          <p style="font-size:13px;font-weight:700;color:#3D1F0A;margin-bottom:0.2rem;">遊戲二</p>
+          <p style="font-size:11px;color:#9A8A7A;">即將推出，敬請期待！</p>
+        </div>
+        <i class="ti ti-puzzle" style="font-size:28px;color:#a39179;" aria-hidden="true"></i>
+      </div>
+      <div style="padding:0 1rem 0.9rem;">
+        <div style="display:flex;align-items:center;justify-content:center;gap:6px;background:#d4c9b5;color:#fff;border-radius:50px;padding:0.55rem;font-size:12px;font-weight:700;font-family:'Noto Sans TC',sans-serif;">
+          <i class="ti ti-clock" style="font-size:14px;" aria-hidden="true"></i> 即將推出
+        </div>
+      </div>
     </div>
-    <p class="quiz-feedback" id="quizFeedback"></p>
-    <button class="quiz-next" id="quizNextBtn" onclick="nextQuestion()" style="display:none">下一題 →</button>
-    <p class="quiz-note"><i class="ti ti-pencil" style="font-size:12px;" aria-hidden="true"></i> 插圖由 cheng.shuang 手繪，後續將陸續更新更多題目！</p>
+  </div>
+
+  <!-- 遊戲三（即將推出） -->
+  <div class="game-panel hidden" id="game-game3" style="width:100%;max-width:340px;">
+    <div style="background:#fff;border:1px solid #d4c9b5;border-radius:14px;overflow:hidden;">
+      <div style="padding:0.9rem 1rem 0.7rem;display:flex;align-items:center;justify-content:space-between;">
+        <div>
+          <p style="font-size:13px;font-weight:700;color:#3D1F0A;margin-bottom:0.2rem;">遊戲三</p>
+          <p style="font-size:11px;color:#9A8A7A;">即將推出，敬請期待！</p>
+        </div>
+        <i class="ti ti-stars" style="font-size:28px;color:#a39179;" aria-hidden="true"></i>
+      </div>
+      <div style="padding:0 1rem 0.9rem;">
+        <div style="display:flex;align-items:center;justify-content:center;gap:6px;background:#d4c9b5;color:#fff;border-radius:50px;padding:0.55rem;font-size:12px;font-weight:700;font-family:'Noto Sans TC',sans-serif;">
+          <i class="ti ti-clock" style="font-size:14px;" aria-hidden="true"></i> 即將推出
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="divider"></div>
@@ -375,6 +429,17 @@
 </div>
 
 <script>
+function switchGame(btn, gameId) {
+  document.querySelectorAll('.tabs button.tab').forEach(t => {
+    if (t.getAttribute('onclick') && t.getAttribute('onclick').includes('switchGame')) {
+      t.classList.remove('active');
+    }
+  });
+  btn.classList.add('active');
+  document.querySelectorAll('.game-panel').forEach(p => p.classList.add('hidden'));
+  document.getElementById('game-' + gameId).classList.remove('hidden');
+}
+
 function switchTab(btn, cat) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
@@ -386,11 +451,75 @@ function switchTab(btn, cat) {
     }
   });
 }
-// 初始化：預設顯示生活片
 document.addEventListener('DOMContentLoaded', function() {
+  // 預設顯示生活片
   document.querySelectorAll('#reelList .reel-card').forEach(card => {
     if (card.dataset.cat !== 'life') card.classList.add('hidden');
   });
+
+  // 開團商品自動上架判斷
+  const groupProducts = [
+    {
+      name: 'PUGO 護脊書包',
+      start: '2026-06-08',
+      end: '2026-06-17',
+      buyUrl: 'https://gbf.tw/kjhfz',
+      calUrl: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=PUGO%20%E8%AD%B7%E8%84%8A%E6%9B%B8%E5%8C%85&dates=20260608/20260618&details=%E5%A5%BD%E4%BA%8B%E4%B8%9E%E9%9B%99%E9%96%8B%E5%9C%98'
+    },
+    {
+      name: '喜光護眼檯燈',
+      start: '2026-06-05',
+      end: '2026-06-12',
+      buyUrl: 'https://www.sylstarled.com.tw/hidden/cheng',
+      calUrl: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=%E5%96%9C%E5%85%89%E8%AD%B7%E7%9C%BC%E6%AA%AF%E7%87%88&dates=20260605/20260613&details=%E5%A5%BD%E4%BA%8B%E4%B8%9E%E9%9B%99%E9%96%8B%E5%9C%98'
+    }
+  ];
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const groupArea = document.getElementById('groupBuyingArea');
+  const groupLabel = document.getElementById('groupBuyingLabel');
+  const groupDivider = document.getElementById('groupBuyingDivider');
+  let hasActive = false;
+
+  groupProducts.forEach(p => {
+    const start = new Date(p.start);
+    const end = new Date(p.end);
+    end.setHours(23, 59, 59, 999);
+
+    if (today >= start && today <= end) {
+      hasActive = true;
+      const card = document.createElement('div');
+      card.style.cssText = 'width:100%;max-width:340px;background:#fff;border:1px solid #a39179;border-radius:14px;overflow:hidden;margin-bottom:0.8rem;';
+      card.innerHTML = `
+        <div style="width:100%;height:150px;background:#e8e0d4;border-radius:10px 10px 0 0;display:flex;align-items:center;justify-content:center;font-size:28px;color:#b0a898;">
+          <i class="ti ti-camera" aria-hidden="true"></i>
+        </div>
+        <div style="padding:0.7rem 0.8rem 0.8rem;">
+          <p style="font-size:13px;font-weight:700;color:#3D1F0A;margin-bottom:0.2rem;">${p.name}</p>
+          <p style="font-size:10px;color:#9A8A7A;margin-bottom:0.6rem;">開團中 🎉</p>
+          <div style="display:flex;gap:6px;">
+            <a href="${p.buyUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:4px;background:#6b5540;color:#fff;border-radius:50px;padding:0.35rem 0.8rem;font-size:11px;font-weight:700;font-family:'Noto Sans TC',sans-serif;text-decoration:none;border:none;">
+              <i class="ti ti-shopping-cart" style="font-size:13px;" aria-hidden="true"></i> 立即購買
+            </a>
+            <a href="${p.calUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:4px;border:1px solid #6b5540;color:#6b5540;border-radius:50px;padding:0.35rem 0.8rem;font-size:11px;font-weight:400;font-family:'Noto Sans TC',sans-serif;text-decoration:none;background:transparent;">
+              <i class="ti ti-calendar-plus" style="font-size:13px;" aria-hidden="true"></i> 加入行事曆
+            </a>
+          </div>
+        </div>`;
+      groupArea.appendChild(card);
+
+      // 在預告區隱藏對應的預告卡片
+      document.querySelectorAll('[data-product-name]').forEach(el => {
+        if (el.dataset.productName === p.name) el.style.display = 'none';
+      });
+    }
+  });
+
+  if (hasActive) {
+    groupLabel.style.display = '';
+    groupDivider.style.display = '';
+  }
 });
 
 // 注音遊戲題庫 — 後續可加入插圖 img src
