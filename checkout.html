@@ -24,7 +24,7 @@ body{background:#FDF6EC;font-family:'Noto Sans TC',sans-serif;color:#3D1F0A;min-
 .ship-icon{font-size:22px;margin-bottom:0.3rem;}
 .ship-name{font-size:12px;font-weight:700;color:#3D1F0A;}
 .ship-fee{font-size:11px;color:#A0622A;margin-top:0.2rem;}
-.ship-fee.free{color:#4CAF50;font-weight:700;}
+.ship-fee .free{color:#4CAF50;font-weight:700;}
 .divider{height:1px;background:#C07830;opacity:0.2;margin:1rem 0;}
 .summary{background:#fff;border:1px solid #EDD8B0;border-radius:12px;padding:1rem;margin-bottom:1.2rem;}
 .summary-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:0.5rem;}
@@ -33,40 +33,54 @@ body{background:#FDF6EC;font-family:'Noto Sans TC',sans-serif;color:#3D1F0A;min-
 .free-ship-badge{background:#E8F5E9;color:#4CAF50;border-radius:20px;padding:0.3rem 0.8rem;font-size:11px;font-weight:700;text-align:center;margin-bottom:0.8rem;}
 .almost-free{background:#FFF8E1;color:#F57C00;border-radius:20px;padding:0.3rem 0.8rem;font-size:11px;text-align:center;margin-bottom:0.8rem;}
 .checkout-btn{width:100%;background:#B8401A;color:#fff;border:none;border-radius:50px;padding:0.9rem;font-size:16px;font-weight:700;font-family:'Noto Sans TC',sans-serif;cursor:pointer;margin-bottom:0.8rem;}
-.checkout-btn:disabled{background:#ccc;cursor:not-allowed;}
 .checkout-btn:active{background:#7A2510;}
 .note{font-size:11px;color:#A0622A;text-align:center;line-height:1.8;}
 
-/* 超商選門市區塊 */
+/* 收件資料 */
+.field{margin-bottom:0.8rem;}
+.field label{display:block;font-size:12px;font-weight:700;color:#3D1F0A;margin-bottom:0.35rem;}
+.field label .req{color:#B8401A;}
+.field input{width:100%;background:#fff;border:2px solid #EDD8B0;border-radius:10px;padding:0.7rem 0.8rem;font-size:14px;font-family:'Noto Sans TC',sans-serif;color:#3D1F0A;}
+.field input:focus{outline:none;border-color:#B8401A;}
+.field .hint{font-size:10px;color:#A0622A;margin-top:0.3rem;}
+.home-section{display:none;}
+.home-section.show{display:block;}
+
+/* 超商選門市 */
 .cvs-section{display:none;background:#fff;border:1px solid #EDD8B0;border-radius:12px;padding:1rem;margin-bottom:1rem;}
 .cvs-section.show{display:block;}
 .cvs-type-options{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:0.8rem;}
 .cvs-type-btn{background:#F0D0C0;color:#7A4A20;border:2px solid transparent;border-radius:8px;padding:0.5rem;font-size:12px;font-weight:700;font-family:'Noto Sans TC',sans-serif;cursor:pointer;text-align:center;}
 .cvs-type-btn.selected{border-color:#B8401A;background:#FFF5F0;color:#B8401A;}
 .select-cvs-btn{width:100%;background:#C07830;color:#fff;border:none;border-radius:50px;padding:0.65rem;font-size:13px;font-weight:700;font-family:'Noto Sans TC',sans-serif;cursor:pointer;margin-top:0.5rem;}
-.cvs-result{background:#E8F5E9;border-radius:8px;padding:0.6rem 0.8rem;font-size:12px;color:#2E7D32;margin-top:0.6rem;display:none;}
+.cvs-result{background:#E8F5E9;border-radius:8px;padding:0.6rem 0.8rem;font-size:12px;color:#2E7D32;margin-top:0.6rem;display:none;line-height:1.7;}
 .cvs-result.show{display:block;}
 </style>
 </head>
 <body>
 <div class="topbar">
-  <button class="back-btn" onclick="history.back()">‹</button>
+  <button class="back-btn" type="button" onclick="history.back()">‹</button>
   <span class="topbar-title">結帳</span>
 </div>
-<div class="container">
+
+<form class="container" id="orderForm" method="POST" action="/.netlify/functions/create-order">
+  <input type="hidden" name="productId" id="productId" value="write">
+  <input type="hidden" name="shipType" id="shipType" value="home">
+  <input type="hidden" name="storeId" id="storeId" value="">
+  <input type="hidden" name="storeName" id="storeName" value="">
 
   <p class="sec-title">▸ 選擇商品</p>
-  <div class="product-card selected" onclick="selectProduct(this,'注音符號手寫板',1050,'https://p.ecpay.com.tw/0D7EB9E')">
+  <div class="product-card selected" data-id="write" data-price="1050">
     <h3>注音符號手寫板</h3>
     <p>含木製鉛筆 × 1、練習紙 × 1</p>
     <p class="product-price">$1,050</p>
   </div>
-  <div class="product-card" onclick="selectProduct(this,'注音符號拼音板（小款）',920,'https://p.ecpay.com.tw/568F7C5')">
+  <div class="product-card" data-id="pinyin_small" data-price="920">
     <h3>注音符號拼音板（小款）</h3>
     <p>含字卡、海報、木質拼音板</p>
     <p class="product-price">$920</p>
   </div>
-  <div class="product-card" onclick="selectProduct(this,'注音符號拼音板（大款）',1180,'https://p.ecpay.com.tw/0FA4005')">
+  <div class="product-card" data-id="pinyin_large" data-price="1180">
     <h3>注音符號拼音板（大款）</h3>
     <p>含字卡、海報、木質拼音板（大）</p>
     <p class="product-price">$1,180</p>
@@ -76,29 +90,45 @@ body{background:#FDF6EC;font-family:'Noto Sans TC',sans-serif;color:#3D1F0A;min-
 
   <p class="sec-title">▸ 配送方式</p>
   <div class="ship-options">
-    <div class="ship-option selected" onclick="selectShip(this,'home',120)">
+    <div class="ship-option selected" data-type="home" data-fee="120">
       <div class="ship-icon">🏠</div>
       <div class="ship-name">宅配到府</div>
       <div class="ship-fee" id="homeFee">運費 $120</div>
     </div>
-    <div class="ship-option" onclick="selectShip(this,'cvs',60)">
+    <div class="ship-option" data-type="cvs" data-fee="60">
       <div class="ship-icon">🏪</div>
       <div class="ship-name">超商取貨</div>
       <div class="ship-fee" id="cvsFee">運費 $60</div>
     </div>
   </div>
 
-  <!-- 超商選門市 -->
   <div class="cvs-section" id="cvsSection">
     <p style="font-size:12px;font-weight:700;color:#3D1F0A;margin-bottom:0.6rem;">選擇超商品牌</p>
     <div class="cvs-type-options">
-      <button class="cvs-type-btn selected" onclick="selectCvsType(this,'FAMI')">全家</button>
-      <button class="cvs-type-btn" onclick="selectCvsType(this,'UNIMART')">7-ELEVEN</button>
-      <button class="cvs-type-btn" onclick="selectCvsType(this,'HILIFE')">萊爾富</button>
+      <button type="button" class="cvs-type-btn selected" data-cvs="FAMI">全家</button>
+      <button type="button" class="cvs-type-btn" data-cvs="UNIMART">7-ELEVEN</button>
+      <button type="button" class="cvs-type-btn" data-cvs="HILIFE">萊爾富</button>
     </div>
-    <button class="select-cvs-btn" onclick="openCvsMap()">🗺 選擇取貨門市</button>
-    <div class="cvs-result" id="cvsResult">
-      ✅ 已選擇門市：<span id="cvsStoreName"></span>
+    <button type="button" class="select-cvs-btn" id="selectCvsBtn">🗺 選擇取貨門市</button>
+    <div class="cvs-result" id="cvsResult"></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <p class="sec-title">▸ 收件資料</p>
+  <div class="field">
+    <label for="name">收件人姓名 <span class="req">*</span></label>
+    <input type="text" id="name" name="name" maxlength="20" autocomplete="name" required>
+  </div>
+  <div class="field">
+    <label for="phone">聯絡電話 <span class="req">*</span></label>
+    <input type="tel" id="phone" name="phone" maxlength="20" autocomplete="tel" inputmode="tel" required>
+  </div>
+  <div class="home-section show" id="homeSection">
+    <div class="field">
+      <label for="address">收件地址 <span class="req">*</span></label>
+      <input type="text" id="address" name="address" maxlength="50" autocomplete="street-address" required>
+      <p class="hint">請填寫完整地址，含縣市與區</p>
     </div>
   </div>
 
@@ -121,114 +151,145 @@ body{background:#FDF6EC;font-family:'Noto Sans TC',sans-serif;color:#3D1F0A;min-
     </div>
   </div>
 
-  <button class="checkout-btn" id="checkoutBtn" onclick="goCheckout()">前往付款 →</button>
+  <button class="checkout-btn" type="submit">前往付款 →</button>
   <p class="note">
-    🔒 付款由綠界科技處理，資料加密安全無虞<br>
-    📦 付款完成後將以 Email 通知出貨資訊
+    🔒 付款由綠界科技處理，可選信用卡、ATM 或超商代碼<br>
+    📦 收件資料會隨訂單送出，付款完成即開始備貨
   </p>
-</div>
+</form>
 
 <script>
 const FREE_SHIP = 3600;
-let product = {name:'注音符號手寫板', price:1050, url:'https://p.ecpay.com.tw/0D7EB9E'};
-let ship = {type:'home', fee:120, name:'宅配到府'};
+const ECPAY_MERCHANT_ID = '3350784';
+const SHIP_NAMES = { home: '宅配到府', cvs: '超商取貨' };
+
+let product = { id: 'write', name: '注音符號手寫板', price: 1050 };
+let ship = { type: 'home', fee: 120 };
 let cvsType = 'FAMI';
-let cvsStoreSelected = false;
 
-function selectProduct(el, name, price, url) {
-  document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  product = {name, price, url};
-  updateSummary();
-}
+const $ = id => document.getElementById(id);
 
-function selectShip(el, type, fee) {
-  document.querySelectorAll('.ship-option').forEach(s => s.classList.remove('selected'));
-  el.classList.add('selected');
-  const name = type === 'home' ? '宅配到府' : '超商取貨';
-  ship = {type, fee, name};
-  document.getElementById('cvsSection').className = type === 'cvs' ? 'cvs-section show' : 'cvs-section';
-  updateSummary();
-}
+document.querySelectorAll('.product-card').forEach(card => {
+  card.addEventListener('click', () => {
+    document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    product = {
+      id: card.dataset.id,
+      name: card.querySelector('h3').textContent,
+      price: Number(card.dataset.price),
+    };
+    $('productId').value = product.id;
+    updateSummary();
+  });
+});
 
-function selectCvsType(el, type) {
-  document.querySelectorAll('.cvs-type-btn').forEach(b => b.classList.remove('selected'));
-  el.classList.add('selected');
-  cvsType = type;
-}
+document.querySelectorAll('.ship-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('.ship-option').forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+    ship = { type: opt.dataset.type, fee: Number(opt.dataset.fee) };
+    $('shipType').value = ship.type;
+    $('cvsSection').className = ship.type === 'cvs' ? 'cvs-section show' : 'cvs-section';
+    $('homeSection').className = ship.type === 'home' ? 'home-section show' : 'home-section';
+    $('address').required = ship.type === 'home';
+    updateSummary();
+  });
+});
 
-async function openCvsMap() {
-  const btn = document.querySelector('.select-cvs-btn');
-  btn.textContent = '⏳ 開啟地圖中...';
-  btn.disabled = true;
-  try {
-    const res = await fetch('/.netlify/functions/select-cvs', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ cvsType })
-    });
-    const data = await res.json();
-    if (data.formHtml) {
-      // 開啟新視窗讓顧客選門市
-      const w = window.open('', '_blank', 'width=900,height=700');
-      w.document.write(data.formHtml);
-      // 模擬選好門市後回傳（實際需要綠界回調）
-      setTimeout(() => {
-        document.getElementById('cvsStoreName').textContent = '已選擇（請重新整理確認）';
-        document.getElementById('cvsResult').className = 'cvs-result show';
-        cvsStoreSelected = true;
-      }, 3000);
-    }
-  } catch(err) {
-    alert('開啟門市地圖失敗，請稍後再試');
+document.querySelectorAll('.cvs-type-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cvs-type-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    cvsType = btn.dataset.cvs;
+    // 換了超商品牌就要重新選門市
+    $('storeId').value = '';
+    $('storeName').value = '';
+    $('cvsResult').className = 'cvs-result';
+  });
+});
+
+// 開啟綠界電子地圖；選完門市由 cvs-reply function 用 postMessage 回傳
+$('selectCvsBtn').addEventListener('click', () => {
+  const win = window.open('', 'ecpayCvsMap', 'width=900,height=700');
+  if (!win) {
+    alert('請允許彈出視窗，才能開啟門市地圖');
+    return;
   }
-  btn.textContent = '🗺 選擇取貨門市';
-  btn.disabled = false;
-}
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = 'https://logistics.ecpay.com.tw/Express/map';
+  form.target = 'ecpayCvsMap';
+  const fields = {
+    MerchantID: ECPAY_MERCHANT_ID,
+    LogisticsType: 'CVS',
+    LogisticsSubType: cvsType,
+    IsCollection: 'N',
+    ServerReplyURL: window.location.origin + '/.netlify/functions/cvs-reply',
+    Device: /Mobi|Android|iPhone/i.test(navigator.userAgent) ? '1' : '0',
+  };
+  Object.entries(fields).forEach(([k, v]) => {
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = k;
+    input.value = v;
+    form.appendChild(input);
+  });
+  document.body.appendChild(form);
+  form.submit();
+  document.body.removeChild(form);
+});
+
+window.addEventListener('message', event => {
+  if (event.origin !== window.location.origin) return;
+  if (!event.data || event.data.type !== 'ecpay-cvs-store') return;
+  const store = event.data.store || {};
+  if (!store.id || !store.name) return;
+  $('storeId').value = store.id;
+  $('storeName').value = store.name;
+  const result = $('cvsResult');
+  result.innerHTML = '✅ 已選擇門市：<strong>' + store.name + '</strong>'
+    + (store.address ? '<br>' + store.address : '');
+  result.className = 'cvs-result show';
+});
 
 function updateSummary() {
   const isFree = product.price >= FREE_SHIP;
   const actualFee = isFree ? 0 : ship.fee;
   const total = product.price + actualFee;
-  document.getElementById('summaryProduct').textContent = product.name;
-  document.getElementById('summaryPrice').textContent = '$' + product.price.toLocaleString();
-  document.getElementById('summaryTotal').textContent = '$' + total.toLocaleString();
-  const shipRow = document.getElementById('shippingRow');
-  const shipSpan = document.getElementById('summaryShipping');
+
+  $('summaryProduct').textContent = product.name;
+  $('summaryPrice').textContent = '$' + product.price.toLocaleString();
+  $('summaryTotal').textContent = '$' + total.toLocaleString();
+
+  const shipRow = $('shippingRow');
+  shipRow.querySelector('span').textContent = '運費（' + SHIP_NAMES[ship.type] + '）';
+  shipRow.className = isFree ? 'summary-row free-ship' : 'summary-row';
+  $('summaryShipping').textContent = isFree ? '免運 🎉' : '$' + actualFee;
+
   if (isFree) {
-    shipRow.className = 'summary-row free-ship';
-    shipRow.querySelector('span').textContent = '運費（' + ship.name + '）';
-    shipSpan.textContent = '免運 🎉';
-    document.getElementById('freeShipMsg').innerHTML = '<div class="free-ship-badge">🎉 恭喜！本訂單已享免運優惠</div>';
-    document.getElementById('homeFee').innerHTML = '<span class="free">免運</span>';
-    document.getElementById('cvsFee').innerHTML = '<span class="free">免運</span>';
+    $('freeShipMsg').innerHTML = '<div class="free-ship-badge">🎉 恭喜！本訂單已享免運優惠</div>';
+    $('homeFee').innerHTML = '<span class="free">免運</span>';
+    $('cvsFee').innerHTML = '<span class="free">免運</span>';
   } else {
-    shipRow.className = 'summary-row';
-    shipRow.querySelector('span').textContent = '運費（' + ship.name + '）';
-    shipSpan.textContent = '$' + actualFee;
     const diff = FREE_SHIP - product.price;
-    document.getElementById('freeShipMsg').innerHTML = '<div class="almost-free">再購 $' + diff.toLocaleString() + ' 即可享免運優惠（滿 $3,600 免運）</div>';
-    document.getElementById('homeFee').className = 'ship-fee';
-    document.getElementById('homeFee').textContent = '運費 $120';
-    document.getElementById('cvsFee').className = 'ship-fee';
-    document.getElementById('cvsFee').textContent = '運費 $60';
+    $('freeShipMsg').innerHTML = '<div class="almost-free">再購 $' + diff.toLocaleString() + ' 即可享免運優惠（滿 $3,600 免運）</div>';
+    $('homeFee').textContent = '運費 $120';
+    $('cvsFee').textContent = '運費 $60';
   }
 }
 
-function goCheckout() {
-  if (ship.type === 'cvs' && !cvsStoreSelected) {
+$('orderForm').addEventListener('submit', event => {
+  if (ship.type === 'cvs' && !$('storeId').value) {
+    event.preventDefault();
     alert('請先選擇取貨門市！');
-    return;
   }
-  window.location.href = product.url;
-}
+});
 
 updateSummary();
 
-const p = new URLSearchParams(window.location.search).get('product');
-if (p === 'write') document.querySelectorAll('.product-card')[0].click();
-else if (p === 'pinyin_small') document.querySelectorAll('.product-card')[1].click();
-else if (p === 'pinyin_large') document.querySelectorAll('.product-card')[2].click();
+const preset = new URLSearchParams(window.location.search).get('product');
+const presetCard = document.querySelector('.product-card[data-id="' + preset + '"]');
+if (presetCard) presetCard.click();
 </script>
 </body>
 </html>
