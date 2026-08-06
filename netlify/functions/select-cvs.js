@@ -1,8 +1,8 @@
 const crypto = require('crypto');
 
-const MERCHANT_ID = '3350784';
-const HASH_KEY = 'LGtbLNctGyKMHCKd';
-const HASH_IV = 'ZfXzRRBdTemplmLf';
+const MERCHANT_ID = process.env.ECPAY_MERCHANT_ID;
+const HASH_KEY = process.env.ECPAY_HASH_KEY;
+const HASH_IV = process.env.ECPAY_HASH_IV;
 
 function generateCheckMac(params) {
   const sorted = Object.keys(params).sort().reduce((obj, key) => {
@@ -28,6 +28,9 @@ exports.handler = async (event) => {
 
   if (event.httpMethod === 'OPTIONS') return { statusCode: 200, headers, body: '' };
   if (event.httpMethod !== 'POST') return { statusCode: 405, headers, body: 'Method Not Allowed' };
+  if (!MERCHANT_ID || !HASH_KEY || !HASH_IV) {
+    return { statusCode: 500, headers, body: JSON.stringify({ error: 'ECPay credentials are not configured' }) };
+  }
 
   try {
     const body = JSON.parse(event.body);
