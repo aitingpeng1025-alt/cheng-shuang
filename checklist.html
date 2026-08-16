@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="theme-color" content="#FDF6EC">
+<title>小一入學準備清單</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FDF6EC;
+    --card:#FBF1DF;
+    --border:#C07830;
+    --accent:#B8401A;
+    --icon:#C08A4E;
+    --icon-light:#E4C596;
+    --ink:#3E332B;
+    --muted:#8A7660;
+    --check-bg:#EFE0BE;
+  }
+  *{box-sizing:border-box;}
+  html{
+    background-color:#FDF6EC;
+    min-height:100%;
+    color-scheme:light;
+  }
+  body{
+    margin:0;
+    min-height:100vh;
+    background-color:#FDF6EC;
+    background-image:radial-gradient(ellipse at top right, rgba(192,138,78,0.10), transparent 55%);
+    font-family:"Noto Sans TC", sans-serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{
+    max-width:560px;
+    margin:0 auto;
+    padding:32px 20px 60px;
+    background-color:#FDF6EC;
+    min-height:100vh;
+  }
+  header{
+    position:relative;
+    margin-bottom:22px;
+  }
+  .eyebrow{
+    display:inline-block;
+    font-size:13px;
+    letter-spacing:0.14em;
+    color:var(--icon);
+    border:1px solid var(--border);
+    border-radius:999px;
+    padding:3px 12px;
+    margin-bottom:10px;
+    background:rgba(192,138,78,0.08);
+  }
+  h1{
+    font-family:"Noto Serif TC", serif;
+    font-weight:900;
+    font-size:32px;
+    margin:0 0 6px;
+    line-height:1.25;
+    color:#3E3E3E;
+  }
+  h1 .heart{color:#3E3E3E;font-size:24px;margin-left:4px;}
+  .sub{
+    color:var(--muted);
+    font-size:14px;
+    margin:0;
+    line-height:1.6;
+  }
+  .divider{
+    border:none;
+    border-top:1.5px solid var(--border);
+    opacity:0.45;
+    margin:18px 0 20px;
+  }
+
+  /* progress */
+  .progress-card{
+    background:var(--card);
+    border:1px solid rgba(192,120,48,0.35);
+    border-radius:20px;
+    padding:16px 18px;
+    margin-bottom:24px;
+  }
+  .progress-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:10px;
+  }
+  .progress-label{font-size:13px;color:var(--muted);}
+  .progress-count{font-family:"Noto Serif TC",serif;font-weight:700;font-size:15px;color:var(--accent);}
+  .bar-track{
+    height:10px;
+    background:#EFE1C7;
+    border-radius:999px;
+    overflow:hidden;
+    position:relative;
+  }
+  .bar-fill{
+    height:100%;
+    background:linear-gradient(90deg, var(--icon), var(--accent));
+    border-radius:999px;
+    transition:width 0.45s ease;
+  }
+  .blooms{
+    margin-top:10px;
+    font-size:15px;
+    letter-spacing:2px;
+    opacity:0.85;
+  }
+
+  /* tabs */
+  .tabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:18px;
+  }
+  .tab{
+    flex:1;
+    text-align:center;
+    padding:10px 8px;
+    border-radius:14px;
+    border:1px solid var(--border);
+    font-size:14px;
+    font-weight:700;
+    color:var(--icon);
+    background:transparent;
+    cursor:pointer;
+    font-family:"Noto Sans TC",sans-serif;
+    transition:all 0.2s ease;
+  }
+  .tab.active{
+    background:var(--icon);
+    color:#fff;
+    border-color:var(--icon);
+  }
+
+  /* item cards */
+  .section-note{
+    font-size:12.5px;
+    color:var(--muted);
+    margin:0 2px 12px;
+  }
+  .item{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    background:var(--card);
+    border:1px solid rgba(192,120,48,0.30);
+    border-radius:18px;
+    padding:12px 14px;
+    margin-bottom:10px;
+    transition:background 0.25s ease, border-color 0.25s ease;
+  }
+  .item.checked{
+    background:#F4E9CE;
+    border-color:var(--accent);
+  }
+  .check-btn{
+    flex:none;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:2px solid var(--icon);
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    font-size:18px;
+    color:transparent;
+    transition:all 0.2s ease;
+    position:relative;
+  }
+  .check-btn.checked{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:#fff;
+    transform:scale(1.04);
+  }
+  .item-body{flex:1;min-width:0;}
+  .item-name{
+    font-size:15px;
+    font-weight:700;
+    color:var(--ink);
+    margin:0 0 2px;
+  }
+  .item.checked .item-name{
+    color:var(--muted);
+    text-decoration:line-through;
+    text-decoration-color:rgba(184,64,26,0.5);
+  }
+  .item-note{
+    font-size:12px;
+    color:var(--muted);
+    margin:0;
+    line-height:1.5;
+  }
+  .buy-link{
+    flex:none;
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    font-size:12px;
+    font-weight:700;
+    color:#fff;
+    background:var(--icon);
+    border-radius:999px;
+    padding:7px 12px;
+    text-decoration:none;
+    white-space:nowrap;
+    transition:background 0.2s ease;
+  }
+  .buy-link:hover{background:var(--accent);}
+
+  .picker-panel{
+    background:#F6EAD1;
+    border:1px solid rgba(192,120,48,0.30);
+    border-radius:16px;
+    padding:12px 14px;
+    margin:-4px 0 10px;
+  }
+  .age-tabs{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-bottom:10px;
+  }
+  .age-tab{
+    font-size:12px;
+    font-weight:700;
+    color:var(--icon);
+    background:#fff;
+    border:1px solid var(--icon-light);
+    border-radius:999px;
+    padding:5px 12px;
+    cursor:pointer;
+    font-family:"Noto Sans TC",sans-serif;
+  }
+  .age-tab.active{
+    background:var(--icon);
+    color:#fff;
+    border-color:var(--icon);
+  }
+  .product-links{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .product-link{
+    font-size:13px;
+    font-weight:500;
+    color:var(--ink);
+    background:#fff;
+    border:1px solid rgba(192,120,48,0.35);
+    border-radius:12px;
+    padding:8px 12px;
+    text-decoration:none;
+    display:block;
+  }
+  .product-link:hover{border-color:var(--accent);color:var(--accent);}
+
+  footer{
+    margin-top:30px;
+    text-align:right;
+    display:flex;
+    align-items:baseline;
+    justify-content:flex-end;
+    gap:8px;
+  }
+  footer .script{
+    font-family:"Dancing Script", cursive;
+    font-size:24px;
+    color:var(--icon);
+  }
+  footer .stamp{
+    font-size:11px;
+    color:var(--muted);
+  }
+  .reset{
+    display:block;
+    margin:26px auto 0;
+    background:none;
+    border:none;
+    color:var(--muted);
+    font-size:12px;
+    text-decoration:underline;
+    cursor:pointer;
+    font-family:"Noto Sans TC",sans-serif;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .bar-fill,.item,.check-btn{transition:none;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="eyebrow">新生家長必看</span>
+    <h1>小一入學準備清單<span class="heart">♡</span></h1>
+    <p class="sub">照著清單一項一項打勾，還沒準備的項目點一下就能看好物，開學前輕鬆備齊。</p>
+  </header>
+
+  <hr class="divider">
+
+  <div class="progress-card">
+    <div class="progress-top">
+      <span class="progress-label">已準備進度</span>
+      <span class="progress-count" id="progressCount">0 / 0</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" id="barFill" style="width:0%"></div></div>
+    <div class="blooms" id="blooms"></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="school">學校生活用品</button>
+    <button class="tab" data-tab="stationery">小一文具用品</button>
+  </div>
+
+  <div id="listArea"></div>
+
+  <button class="reset" id="resetBtn">清空所有打勾，重新開始</button>
+
+  <footer><span class="script">Chengshuang</span><span class="stamp">好事丞雙 整理</span></footer>
+</div>
+
+<script>
+// ---------------------------------------------------------------
+// 團購／賣場連結設定：把下面的網址換成你自己的實際連結即可
+// ---------------------------------------------------------------
+const LINKS = {
+  backpack:  "https://www.pugo.tw/",
+  water:     "https://qacollect.com/?srsltid=AfmBOopaDPe9DlhAiCdsyEbeFOSCl7_ryf6MAnySci_qiqaCHhrgz83Z",
+  stationery:"https://shop.lovekidsco.com.tw/shop/427-chengshuang260814"
+};
+
+// 鉛筆依學齡分類：把下面每個商品的網址換成愛兒館對應的實際商品頁即可
+const PRODUCT_LINKS = {
+  "兒童三角原木鉛筆(12cm)": "https://shop.lovekidsco.com.tw/shop/427-chengshuang260814/item/3040094476803/%E5%85%92%E7%AB%A5%E4%B8%89%E8%A7%92%E5%8E%9F%E6%9C%A8%E9%89%9B%E7%AD%86(12cm)%20B%2C6%E5%85%A5%E9%99%84%E7%AD%86%E5%89%8A%E9%80%81%E5%A4%A7%E4%B8%89%E8%A7%92%E6%8F%A1%E7%AD%86%E5%99%A8",
+  "Groove三角洞洞粗鉛筆-藍":   "https://shop.lovekidsco.com.tw/shop/427-chengshuang260814/item/3040094476958/Groove%E4%B8%89%E8%A7%92%E6%B4%9E%E6%B4%9E%E9%89%9B%E7%AD%86-%E8%97%8D(B%2C6%E5%85%A5)",
+  "Groove三角洞洞粗鉛筆-湖水綠": "https://shop.lovekidsco.com.tw/shop/427-chengshuang260814/item/3040094476956/Groove%E4%B8%89%E8%A7%92%E6%B4%9E%E6%B4%9E%E9%89%9B%E7%AD%86-%E6%B9%96%E6%B0%B4%E7%B6%A0(B%2C6%E5%85%A5)",
+  "Groove三角洞洞粗鉛筆-櫻花粉": "https://shop.lovekidsco.com.tw/shop/427-chengshuang260814/item/3040094476957/Groove%E4%B8%89%E8%A7%92%E6%B4%9E%E6%B4%9E%E9%89%9B%E7%AD%86-%E6%AB%BB%E8%8A%B1%E7%B2%89(B%2C6%E5%85%A5)",
+  "Groove三角洞洞細鉛筆-藍-HB": "https://shop.lovekidsco.com.tw/shop/427-chengshuang260814/item/3040094476953/GROOVE%E4%B8%89%E8%A7%92%E6%B4%9E%E6%B4%9E%E9%89%9B%E7%AD%86(%E7%B4%B0)HB%2C12%E5%85%A5",
+  "經典黃桿鉛筆2B": "https://shop.lovekidsco.com.tw/shop/427-chengshuang260814/item/3040094478436/%E7%99%BE%E5%B9%B4%E7%B6%93%E5%85%B8%E9%BB%83%E6%A1%BF%E9%89%9B%E7%AD%862B(12%E5%85%A5)%E9%80%81%E9%89%9B%E7%AD%86%E5%BB%B6%E9%95%B7%E6%A1%BF",
+  "經典黃桿鉛筆B": "https://shop.lovekidsco.com.tw/shop/427-chengshuang260814/item/3040094533445/%E7%99%BE%E5%B9%B4%E7%B6%93%E5%85%B8%E9%BB%83%E6%A1%BF%E9%89%9B%E7%AD%86B(12%E5%85%A5)%E9%80%81%E9%89%9B%E7%AD%86%E5%BB%B6%E9%95%B7%E6%A1%BF",
+  "經典黃桿鉛筆HB": "https://shop.lovekidsco.com.tw/shop/427-chengshuang260814/item/3040094533444/%E7%99%BE%E5%B9%B4%E7%B6%93%E5%85%B8%E9%BB%83%E6%A1%BF%E9%89%9B%E7%AD%86HB(12%E5%85%A5)%E9%80%81%E9%89%9B%E7%AD%86%E5%BB%B6%E9%95%B7%E6%A1%BF"
+};
+
+const AGE_GROUPS = {
+  "幼兒園": ["兒童三角原木鉛筆(12cm)"],
+  "低年級": ["兒童三角原木鉛筆(12cm)", "Groove三角洞洞粗鉛筆-藍", "Groove三角洞洞粗鉛筆-湖水綠", "Groove三角洞洞粗鉛筆-櫻花粉"],
+  "中年級": ["Groove三角洞洞粗鉛筆-藍", "Groove三角洞洞粗鉛筆-湖水綠", "Groove三角洞洞粗鉛筆-櫻花粉", "Groove三角洞洞細鉛筆-藍-HB", "經典黃桿鉛筆2B", "經典黃桿鉛筆B", "經典黃桿鉛筆HB"],
+  "高年級": ["Groove三角洞洞細鉛筆-藍-HB", "經典黃桿鉛筆2B", "經典黃桿鉛筆B", "經典黃桿鉛筆HB"]
+};
+
+const DATA = {
+  school: {
+    note: "以下依學校提供的入學項目，加上實際帶哥哥走過小一生活後的調整經驗整理而成",
+    items: [
+      {id:"s1", name:"後背式書包", note:"不要拖拉式的行李箱款", link:"backpack"},
+      {id:"s2", name:"筆袋、鉛筆盒", note:"建議不要花樣、卡通，降低課堂上分心的可能", link:"stationery"},
+      {id:"s3", name:"水壺一個", note:"有背帶佳", link:"water"},
+      {id:"s4", name:"餐具一組", note:"依孩子飲食習慣準備防燙餐盤或餐盒", link:null},
+      {id:"s5", name:"抹布一條", note:"需縫扣環方便懸掛收納", link:null},
+      {id:"s6", name:"衛生紙一包", note:"", link:null},
+      {id:"s7", name:"濕紙巾一包", note:"", link:null},
+      {id:"s8", name:"刷牙用具", note:"牙刷、牙膏、漱口杯", link:null},
+      {id:"s9", name:"口罩5個", note:"用夾鏈袋裝，方便替換保持乾淨", link:null}
+    ]
+  },
+  stationery: {
+    note: "以下依實際帶哥哥走過小一生活後的經驗調整而成，細節部分請依孩子個別狀況挑選、採購",
+    items: [
+      {id:"t1", name:"鉛筆", note:"依孩子學齡挑選合適的筆芯粗細", link:null, hasPicker:true},
+      {id:"t2", name:"橡皮擦", note:"強烈建議，姓名貼一定要貼，擦子家裡請多備用至少5個", link:"stationery"},
+      {id:"t3", name:"直尺", note:"建議15公分，放得進鉛筆盒又能好辨識的大數字", link:"stationery"},
+      {id:"t4", name:"粉蠟筆24色以上", note:"", link:"stationery"},
+      {id:"t5", name:"水性彩色筆24色以上", note:"", link:"stationery"},
+      {id:"t6", name:"色鉛筆24色以上", note:"", link:"stationery"},
+      {id:"t7", name:"A4透明L資料夾一個", note:"放通知單用", link:null},
+      {id:"t8", name:"墊板", note:"建議素色，不要有卡通、乘法、注音等等的塗鴉，課堂上使用減少分心", link:null},
+      {id:"t9", name:"雙面膠一捲", note:"", link:null},
+      {id:"t10", name:"白膠一罐", note:"", link:"stationery"},
+      {id:"t11", name:"膠水一罐", note:"", link:null},
+      {id:"t12", name:"安全剪刀一把", note:"注意有安全鈕、刀頭圓潤比較安全", link:null},
+      {id:"t13", name:"雙頭黑色奇異筆一支", note:"老師有建議可同一支雙頭，也可以買粗細各一支", link:null},
+      {id:"t14", name:"姓名貼數個", note:"一般標籤貼紙，好撕好貼", link:"stationery"}
+    ]
+  }
+};
+
+const STORAGE_KEY = "checklist:grade1:v1";
+let checked = {};
+let currentTab = "school";
+let openPicker = null;
+let selectedAge = {};
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){ checked = JSON.parse(raw); }
+  }catch(e){ checked = {}; }
+  render();
+}
+
+function saveState(){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(checked));
+  }catch(e){ /* best-effort */ }
+}
+
+function allItems(){
+  return [...DATA.school.items, ...DATA.stationery.items];
+}
+
+function updateProgress(){
+  const total = allItems().length;
+  const done = allItems().filter(i => checked[i.id]).length;
+  document.getElementById("progressCount").textContent = done + " / " + total;
+  const pct = total ? Math.round((done/total)*100) : 0;
+  document.getElementById("barFill").style.width = pct + "%";
+  const bloomCount = Math.round((pct/100)*10);
+  document.getElementById("blooms").textContent = "❀".repeat(bloomCount) + "·".repeat(10-bloomCount);
+}
+
+function renderList(){
+  const area = document.getElementById("listArea");
+  const section = DATA[currentTab];
+  let html = '<p class="section-note">' + section.note + '</p>';
+  section.items.forEach(item => {
+    const isChecked = !!checked[item.id];
+    let actionHtml = '';
+    if (!isChecked) {
+      if (item.hasPicker) {
+        actionHtml = `<button class="buy-link picker-toggle" data-picker="${item.id}">依學齡挑選 ${openPicker === item.id ? '▴' : '▾'}</button>`;
+      } else if (item.link) {
+        actionHtml = `<a class="buy-link" href="${LINKS[item.link]}" target="_blank" rel="noopener">還沒準備？</a>`;
+      }
+    }
+    html += `
+      <div class="item ${isChecked ? 'checked' : ''}">
+        <button class="check-btn ${isChecked ? 'checked' : ''}" data-id="${item.id}" aria-label="標記 ${item.name} 為已準備">${isChecked ? '✓' : ''}</button>
+        <div class="item-body">
+          <p class="item-name">${item.name}</p>
+          ${item.note ? `<p class="item-note">${item.note}</p>` : ''}
+        </div>
+        ${actionHtml}
+      </div>`;
+
+    if (!isChecked && item.hasPicker && openPicker === item.id) {
+      const age = selectedAge[item.id] || Object.keys(AGE_GROUPS)[0];
+      html += `<div class="picker-panel">
+        <div class="age-tabs">
+          ${Object.keys(AGE_GROUPS).map(a => `<button class="age-tab ${a === age ? 'active' : ''}" data-item="${item.id}" data-age="${a}">${a}</button>`).join('')}
+        </div>
+        <div class="product-links">
+          ${AGE_GROUPS[age].map(p => `<a class="product-link" href="${PRODUCT_LINKS[p]}" target="_blank" rel="noopener">${p}</a>`).join('')}
+        </div>
+      </div>`;
+    }
+  });
+  area.innerHTML = html;
+
+  area.querySelectorAll(".check-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-id");
+      checked[id] = !checked[id];
+      saveState();
+      render();
+    });
+  });
+
+  area.querySelectorAll(".picker-toggle").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-picker");
+      openPicker = (openPicker === id) ? null : id;
+      renderList();
+    });
+  });
+
+  area.querySelectorAll(".age-tab").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-item");
+      selectedAge[id] = btn.getAttribute("data-age");
+      renderList();
+    });
+  });
+}
+
+function render(){
+  renderList();
+  updateProgress();
+}
+
+document.querySelectorAll(".tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+    currentTab = tab.getAttribute("data-tab");
+    render();
+  });
+});
+
+document.getElementById("resetBtn").addEventListener("click", () => {
+  checked = {};
+  saveState();
+  render();
+});
+
+loadState();
+</script>
+</body>
+</html>
